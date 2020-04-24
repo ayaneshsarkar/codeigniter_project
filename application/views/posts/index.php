@@ -8,6 +8,7 @@
       <small><?php echo $post['created_at'] ?></small>
     </div>
     <p class="card-text"><?php echo $post['body']; ?></p>
+    <a href="<?php echo site_url('/posts/'.$post['slug']); ?>" class="btn btn-dark">Read More</a>
   </div>
 
 <?php endforeach; ?>

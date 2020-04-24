@@ -13,7 +13,7 @@
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
     <div class="container">
       <a href="<?php echo base_url(); ?>" class="navbar-brand">CodeIgniter III</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
 
