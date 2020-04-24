@@ -30,4 +30,22 @@
 
     }
 
+    public function create() {
+
+      $data['title'] = 'Create Post';
+
+      $this->form_validation->set_rules('title', 'Title', 'required');
+      $this->form_validation->set_rules('body', 'Body', 'required');
+
+      if ($this->form_validation->run() === FALSE) {
+        $this->load->view('layout/header');
+        $this->load->view('posts/create', $data);
+        $this->load->view('layout/footer');
+      } else {
+        $this->post_model->create_post();
+        redirect('posts');
+      }
+
+    }
+
   }

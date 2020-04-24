@@ -18,10 +18,13 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item"><a href="<?php echo base_url(); ?>" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="<?php echo base_url(); ?>about" class="nav-link">About</a></li>
           <li class="nav-item"><a href="<?php echo base_url(); ?>posts" class="nav-link">Blog</a></li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="<?php echo base_url(); ?>posts/create" class="nav-link">Create Post</a></li>
         </ul>
       </div>
     </div>
