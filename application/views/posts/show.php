@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row justify-content-center align-items-center">
   <div class="col-md-2"></div>
   <div class="col-md-8">
     <h1 class="mt-4 mb-3"><?php echo $post['title']; ?></h1>
@@ -15,7 +15,9 @@
     <p class="lead mb-4"><?php echo $post['body']; ?></p>
 
     <?php if ($post['cover_image'] != 'no_image.jpg'): ?>
-      <img src="<?php echo site_url(); ?>assets/images/posts/<?php echo $post['cover_image']; ?>" alt="<?php echo $post['title'] ?>" class="img-fluid my-3">
+      <div class="d-flex justify-content-center align-items-center my-3">
+        <img src="<?php echo site_url(); ?>assets/images/posts/<?php echo $post['cover_image']; ?>" alt="<?php echo $post['title'] ?>" class="img-fluid">
+      </div>
     <?php endif; ?>
 
     <hr>

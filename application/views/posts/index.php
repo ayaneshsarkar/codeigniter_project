@@ -9,7 +9,7 @@
             <div class="bg-light p-2 mb-2">
               <small><?php echo $post['updated_at']; ?></small> in <strong><?php echo $post['name']; ?></strong>
             </div>
-            <p class="card-text"><?php echo word_limiter($post['body'], 70); ?></p>
+            <p class="card-text"><?php echo word_limiter($post['body'], 50); ?></p>
           </div>
           <?php if ($post['cover_image'] != 'no_image.jpg'): ?>
             <img src="<?php echo site_url(); ?>assets/images/posts/<?php echo $post['cover_image']; ?>" alt="<?php echo $post['title'] ?>" class="card-img img-fluid mb-4">
