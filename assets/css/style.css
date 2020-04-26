@@ -1,3 +1,12 @@
 .light-bg {
   background-color: #f0f0f0;
 }
+
+.bg-dark {
+  background-color: #dd2c00 !important;
+}
+
+.thead-dark th {
+  background-color: #dd2c00 !important;
+  border-color: #dd2c00 !important;
+}

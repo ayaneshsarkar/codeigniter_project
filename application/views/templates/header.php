@@ -25,6 +25,7 @@
           <li class="nav-item"><a href="<?php echo base_url(); ?>categories" class="nav-link">Categories</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="<?php echo base_url(); ?>users/register" class="nav-link">Register</a></li>
           <li class="nav-item"><a href="<?php echo base_url(); ?>posts/create" class="nav-link">Create Post</a></li>
           <li class="nav-item"><a href="<?php echo base_url(); ?>categories/create" class="nav-link">Create Categories</a></li>
         </ul>
@@ -33,3 +34,8 @@
   </nav>
 
   <div class="container">
+
+   <!-- Flash Message -->
+   <?php if ($this->session->flashdata('user_registered')): ?>
+    <p class="alert alert-success"><?php echo $this->session->flashdata('user_registered'); ?></p>
+  <?php endif; ?>
