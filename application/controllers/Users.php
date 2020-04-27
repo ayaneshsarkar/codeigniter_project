@@ -30,7 +30,58 @@
 
     }
 
-    function check_username_exists($username) {
+    public function login() {
+
+      $data['title'] = 'Login';
+
+      $this->form_validation->set_rules('username', 'Username', 'required');
+      $this->form_validation->set_rules('password', 'Password', 'required');
+
+      if ($this->form_validation->run() === FALSE) {
+        $this->load->view('templates/header');
+        $this->load->view('users/login', $data);
+        $this->load->view('templates/footer');
+      } else {
+        // Get Username
+        $username = $this->input->post('username');
+        // Get and Encrypt Password
+        $password = md5($this->input->post('password'));
+        // Login User
+        $user_id = $this->user_model->login($username, $password);
+
+        if ($user_id) {
+          // Create Session
+          $user_data = [
+            'user_id' => $user_id,
+            'username' => $username,
+            'logged_in' => true
+          ];
+          $this->session->set_userdata($user_data);
+          // Set Message
+          $this->session->set_flashdata('user_loggedin', 'You are now successfully Logged In');
+          redirect('posts');
+        } else {
+          $this->session->set_flashdata('login_failed', 'Username or Password is incorrect!');
+          redirect('users/login');
+        }
+
+      }
+
+    }
+
+    public function logout() {
+
+      // Unset Session
+      $this->session->unset_userdata('user_id');
+      $this->session->unset_userdata('username');
+      $this->session->unset_userdata('logged_in');
+
+      $this->session->set_flashdata('user_loggedout', 'You are now successfully Logged Out');
+      redirect('users/login');
+
+    }
+
+    public function check_username_exists($username) {
       $this->form_validation->set_message('check_username_exists', 'Username Already Exists');
 
       if ($this->user_model->check_username_exists($username)) {
@@ -40,7 +91,7 @@
       }
     }
 
-    function check_email_exists($email) {
+    public function check_email_exists($email) {
       $this->form_validation->set_message('check_email_exists', 'Email Already Exists');
 
       if ($this->user_model->check_email_exists($email)) {

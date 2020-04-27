@@ -20,6 +20,7 @@
       </div>
     <?php endif; ?>
 
+    <?php if ($this->session->userdata('user_id') == $post['user_id']): ?>
     <hr>
     <div class="mb-5">
       <a href="<?php echo base_url().'posts/edit/'.$post['slug'] ?>" class="btn btn-dark">Edit</a>
@@ -27,8 +28,11 @@
         <input type="submit" value='Delete' class="btn btn-danger">
       </form>
     </div>
-    <hr>
+    <?php endif; ?>
+
+    
     <?php if (!empty($comments)): ?>
+      <hr>
       <h3 class="display-5 mt-5 mb-4">Comments</h3>
       <?php foreach($comments as $comment): ?>
       <div class="card card-body mb-3 light-bg">

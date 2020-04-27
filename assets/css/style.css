@@ -10,3 +10,14 @@
   background-color: #dd2c00 !important;
   border-color: #dd2c00 !important;
 }
+
+.page-item strong {
+  position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}

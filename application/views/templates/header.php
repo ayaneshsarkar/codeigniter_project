@@ -25,10 +25,16 @@
           <li class="nav-item"><a href="<?php echo base_url(); ?>categories" class="nav-link">Categories</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
+        <?php if (!$this->session->userdata('logged_in')): ?>
         <li class="nav-item"><a href="<?php echo base_url(); ?>users/register" class="nav-link">Register</a></li>
+        <li class="nav-item"><a href="<?php echo base_url(); ?>users/login" class="nav-link">Login</a></li>
+        <?php endif; ?>
+        <?php if ($this->session->userdata('logged_in')): ?>
           <li class="nav-item"><a href="<?php echo base_url(); ?>posts/create" class="nav-link">Create Post</a></li>
           <li class="nav-item"><a href="<?php echo base_url(); ?>categories/create" class="nav-link">Create Categories</a></li>
+          <li class="nav-item"><a href="<?php echo base_url(); ?>users/logout" class="nav-link">Logout</a></li>
         </ul>
+        <?php endif; ?>
       </div>
     </div>
   </nav>
@@ -38,4 +44,20 @@
    <!-- Flash Message -->
    <?php if ($this->session->flashdata('user_registered')): ?>
     <p class="alert alert-success"><?php echo $this->session->flashdata('user_registered'); ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->session->flashdata('login_failed')): ?>
+    <p class="alert alert-danger"><?php echo $this->session->flashdata('login_failed'); ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->session->flashdata('user_loggedin')): ?>
+    <p class="alert alert-danger"><?php echo $this->session->flashdata('user_loggedin'); ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->session->flashdata('user_loggedout')): ?>
+    <p class="alert alert-success"><?php echo $this->session->flashdata('user_loggedout'); ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->session->flashdata('category_deleted')): ?>
+    <p class="alert alert-success"><?php echo $this->session->flashdata('category_deleted'); ?></p>
   <?php endif; ?>

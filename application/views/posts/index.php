@@ -21,3 +21,9 @@
   <div class="col-md-2"></div>
 </div>
 
+<div class="row justify-content-center my-5">
+  <ul class="pagination justify-content-center">
+    <li class="page-item d-flex"><?php echo $this->pagination->create_links(); ?></li>
+  </ul>
+</div>
+

@@ -2,12 +2,25 @@
 
   class Posts extends CI_Controller {
 
-    public function index($page = 'index') {
+    public function index($offset = 0) {
+
+      if (!$this->session->userdata('logged_in')) {
+        redirect('users/login');
+      }
+
+      // Pagoination Config
+      $config['base_url'] = base_url().'/posts/index';
+      $config['total_rows'] = $this->db->count_all('posts');
+      $config['per_page'] = '3';
+      $config['uri_segment'] = '3';
+      $config['attributes'] = ['class' => 'page-link mx-1'];
+      // Init Pagination
+      $this->pagination->initialize($config);
 
       $data['title'] = 'All Posts Listed Below';
       $data['categories'] = $this->post_model->get_categories();
 
-      $data['posts'] = $this->post_model->get_posts();
+      $data['posts'] = $this->post_model->get_posts(FALSE, $config['per_page'], $offset);
 
       $this->load->view('layout/header');
       $this->load->view('posts/index', $data);
@@ -16,6 +29,9 @@
 
     
     public function show($slug = NULL) {
+      if (!$this->session->userdata('logged_in')) {
+        redirect('users/login');
+      }
 
       $data['post'] = $this->post_model->get_posts($slug);
       $data['categories'] = $this->post_model->get_categories();
@@ -35,6 +51,9 @@
     }
 
     public function create() {
+      if (!$this->session->userdata('logged_in')) {
+        redirect('users/login');
+      }
 
       $data['title'] = 'Create Post';
       $data['categories'] = $this->post_model->get_categories();
@@ -77,13 +96,24 @@
     }
 
     public function delete($id) {
+      if (!$this->session->userdata('logged_in')) {
+        redirect('users/login');
+      }
       $this->post_model->delete_post($id);
       redirect('posts');
     }
 
     public function edit($slug) {
+      if (!$this->session->userdata('logged_in')) {
+        redirect('users/login');
+      }
 
       $data['post'] = $this->post_model->get_posts($slug);
+
+      if ($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']) {
+        redirect('posts');
+      }
+
       $data['categories'] = $this->post_model->get_categories();
 
       if (empty($data['post'])) {
@@ -99,6 +129,15 @@
     }
 
     public function update($slug) {
+      if (!$this->session->userdata('logged_in')) {
+        redirect('users/login');
+      }
+
+      $data['post'] = $this->post_model->get_posts($slug);
+
+      if ($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']) {
+        redirect('posts');
+      }
 
       // Validate Form
       $this->form_validation->set_rules('title', 'Title', 'required');
